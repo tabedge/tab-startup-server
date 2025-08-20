@@ -27,9 +27,9 @@ export interface IUser {
   picture?: string;
   password: string;
   role: Role;
-  founder?: Types.ObjectId;
-  investor?: Types.ObjectId;
-  userId: number;
+  entrepreneur_profile?: Types.ObjectId;
+  investor_profile?: Types.ObjectId;
+  userId?: number;
   isDeleted?: string;
   isActive?: IsActive;
   isVerified?: boolean;

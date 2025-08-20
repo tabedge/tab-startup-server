@@ -80,13 +80,13 @@ const userSchema = new Schema<IUser>(
       type: [authProviderSchema],
       default: [],
     },
-    founder: {
+    entrepreneur_profile: {
       type: Schema.Types.ObjectId,
-      ref: 'Founder',
+      ref: 'FounderProfile',
     },
-    investor: {
+    investor_profile: {
       type: Schema.Types.ObjectId,
-      ref: 'Investor',
+      ref: 'InvestorProfile',
     },
   },
   {
