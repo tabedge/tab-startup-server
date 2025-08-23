@@ -6,8 +6,10 @@ import { InvestorProfileServices } from './investorProfile.service';
 
 const createInvestorProfile = catchAsync(async (req: Request, res: Response) => {
   const payload = req.body;
+
   const data = await InvestorProfileServices.createInvestorProfile(payload);
-  
+  console.log(payload);
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,

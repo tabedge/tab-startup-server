@@ -1,4 +1,3 @@
-import { Types } from 'mongoose';
 import httpStatus from 'http-status-codes';
 import AppError from '../../errorHelpers/AppError';
 import { User } from '../user/user.model';
@@ -6,15 +5,14 @@ import { IInvestorProfile } from './investorProfile.interface';
 import { InvestorProfile } from './investorProfile.model';
 
 const createInvestorProfile = async (payload: IInvestorProfile) => {
-  const { userId, ...data } = payload;
+  // console.log('PAYLOAD-->', payload);
+
   // Validate ObjectId
-  if (!Types.ObjectId.isValid(userId)) {
-    throw new AppError(httpStatus.BAD_REQUEST, `Invalid userId: ${userId}`);
-  }
+
   // Check if user exists
-  const userExists = await User.findById(userId);
+  const userExists = await User.findById(payload.userId);
   if (!userExists) {
-    throw new AppError(httpStatus.NOT_FOUND, `User not found by your given id ${userId}`);
+    throw new AppError(httpStatus.NOT_FOUND, `User not found by your given id ${payload.userId}`);
   }
 
   const linkedinExit = await InvestorProfile.findOne({ linkedIn: payload.linkedIn });
@@ -24,10 +22,10 @@ const createInvestorProfile = async (payload: IInvestorProfile) => {
   }
 
   // Create profile
-  const result = await InvestorProfile.create({ ...data, userId });
+  const result = await InvestorProfile.create(payload);
 
   // Link profile to user
-  await User.findByIdAndUpdate(userId, { investor_profile: result._id }, { new: true });
+  await User.findByIdAndUpdate(payload.userId, { investor_profile: result._id }, { new: true });
 
   return result;
 };

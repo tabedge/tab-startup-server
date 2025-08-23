@@ -1,11 +1,11 @@
 import { Schema, model } from 'mongoose';
 import { IEntrepreneur } from './entrepreneurProfile.interface';
 
-const EntrepreneurSchema = new Schema<IEntrepreneur>(
+const entrepreneurSchema = new Schema<IEntrepreneur>(
   {
     founders: {
       names: {
-        type: String,
+        type: [String],
         required: true,
       },
       technicalFounder: {
@@ -16,11 +16,9 @@ const EntrepreneurSchema = new Schema<IEntrepreneur>(
         type: Boolean,
         required: true,
       },
-      coFounderNames: [
-        {
-          type: String,
-        },
-      ],
+      coFounderNames: {
+        type: [String],
+      },
     },
     company: {
       name: {
@@ -31,6 +29,12 @@ const EntrepreneurSchema = new Schema<IEntrepreneur>(
         type: String,
         required: true,
         maxlength: 50,
+      },
+      linkedIn: {
+        type: String,
+      },
+      twitter: {
+        type: String,
       },
       website: {
         type: String,
@@ -43,101 +47,48 @@ const EntrepreneurSchema = new Schema<IEntrepreneur>(
         type: String,
         required: true,
       },
-      locationReason: {
+    },
+    stage: {
+      type: String,
+      enum: ['idea', 'prototype', 'launched', 'scaling'],
+      required: true,
+    },
+    industry: {
+      type: String,
+      required: true,
+    },
+    funding: {
+      amountSeeking: {
+        type: Number,
+        required: true,
+      },
+      currency: {
         type: String,
+        required: true,
+      },
+      equityOffered: {
+        type: Number,
         required: true,
       },
     },
-    progress: {
-      status: {
-        type: String,
-        required: true,
-      },
-      timeSpent: {
-        type: String,
-        required: true,
-      },
-      techStack: {
-        type: String,
-        required: true,
-      },
-      productDemo: {
-        type: String,
-      },
-      selling: {
-        type: Boolean,
-        required: true,
+    traction: {
+      usersCount: {
+        type: Number,
       },
       revenue: {
-        type: Boolean,
-        required: true,
+        type: Number,
       },
-    },
-    ideas: {
-      whyThisIdea: {
+      growthRate: {
         type: String,
-        required: true,
       },
-      expertise: {
-        type: String,
-        required: true,
-      },
-      competitors: {
-        type: String,
-        required: true,
-      },
-      differentiation: {
-        type: String,
-        required: true,
-      },
-      moneyMaking: {
-        type: String,
-        required: true,
-      },
-      category: {
-        type: String,
-        required: true,
-      },
-    },
-    equity: {
-      legalEntity: {
-        type: Boolean,
-        required: true,
-      },
-      investment: {
-        type: Boolean,
-        required: true,
-      },
-      fundraising: {
-        type: Boolean,
-        required: true,
-      },
-      country: {
-        type: String,
-        required: true,
-      },
-    },
-    curious: {
-      discovery: {
-        type: String,
-        required: true,
-      },
-      priorPrograms: {
-        type: String,
-        required: true,
-      },
-    },
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
     },
   },
   {
     timestamps: true,
+    versionKey: false,
   },
 );
 
-const EntrepreneurProfile = model<IEntrepreneur>('EntrepreneurProfile', EntrepreneurSchema);
+const EntrepreneurProfile = model<IEntrepreneur>('EntrepreneurProfile', entrepreneurSchema);
 
 export { EntrepreneurProfile };

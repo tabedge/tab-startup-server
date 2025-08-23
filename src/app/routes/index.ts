@@ -5,6 +5,7 @@ import { OTPRouter } from '../modules/otp/otp.route';
 import { ContactRouter } from '../modules/contact/contact.route';
 import { InvestorProfileRouter } from '../modules/investorProfile/investorProfile.routes';
 import { EntrepreneurProfileRouter } from '../modules/entrepreneurProfile/entrepreneurProfile.routes';
+import { IdeaSubmitRouter } from '../modules/IdeaSubmit/IdeaSubmit.routes';
 
 const router = Router();
 
@@ -37,6 +38,10 @@ const moduleRoutes: IModuleRoutes[] = [
   {
     path: '/entrepreneur-profile',
     element: EntrepreneurProfileRouter,
+  },
+  {
+    path: '/idea-submit',
+    element: IdeaSubmitRouter,
   },
 ];
 

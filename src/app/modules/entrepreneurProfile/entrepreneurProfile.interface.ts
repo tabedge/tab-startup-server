@@ -1,45 +1,40 @@
 import { Types } from 'mongoose';
 
 export interface IEntrepreneur {
+  userId: Types.ObjectId;
+
   founders: {
-    names: string;
+    names: string[];
     technicalFounder: string;
     coFounders: boolean;
     coFounderNames?: string[];
   };
+
   company: {
     name: string;
     shortDescription: string;
+    linkedIn?: string;
+    twitter?: string;
     website?: string;
     product: string;
     location: string;
-    locationReason: string;
   };
-  progress: {
-    status: string;
-    timeSpent: string;
-    techStack: string;
-    productDemo?: string;
-    selling: boolean;
-    revenue: boolean;
+
+  stage: 'idea' | 'prototype' | 'launched' | 'scaling'; // dropdown
+  industry: string;
+
+  funding: {
+    amountSeeking: number;
+    currency: string;
+    equityOffered: number;
   };
-  ideas: {
-    whyThisIdea: string;
-    expertise: string;
-    competitors: string;
-    differentiation: string;
-    moneyMaking: string;
-    category: string;
+
+  traction?: {
+    usersCount?: number;
+    revenue?: number;
+    growthRate?: string;
   };
-  equity: {
-    legalEntity: boolean;
-    investment: boolean;
-    fundraising: boolean;
-    country: string;
-  };
-  curious: {
-    discovery: string;
-    priorPrograms: string;
-  };
-  userId: Types.ObjectId;
+
+  createdAt?: Date;
+  updatedAt?: Date;
 }
