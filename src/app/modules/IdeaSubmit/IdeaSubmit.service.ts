@@ -1,16 +1,13 @@
 import httpStatus from 'http-status-codes';
 import AppError from '../../errorHelpers/AppError';
 import { User } from '../user/user.model';
-import { Types } from 'mongoose';
 import { IIdea } from './IdeaSubmit.interface';
 import { Idea } from './IdeaSubmit.model';
 
 const createIdea = async (payload: IIdea) => {
   const { userId, ...data } = payload;
   // Validate ObjectId
-  if (!Types.ObjectId.isValid(userId)) {
-    throw new AppError(httpStatus.BAD_REQUEST, `Invalid userId: ${userId}`);
-  }
+
   // Check if user exists
   const userExists = await User.findById(userId);
   if (!userExists) {

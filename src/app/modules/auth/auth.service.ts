@@ -88,13 +88,14 @@ const forgotPassword = async (email: string) => {
   });
 
   const resetUILink = `${envVars.FRONTEND_URL}/reset-password?id=${isUserExist._id}&token=${resetToken}`;
+  const fullName = `${isUserExist.firstName} ${isUserExist.lastName}`;
 
   sendEmail({
     to: isUserExist.email,
     subject: 'Password Reset',
     templateName: 'forgetPassword',
     templateData: {
-      name: isUserExist.name,
+      name: fullName,
       resetUILink,
     },
   });

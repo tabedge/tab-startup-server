@@ -66,11 +66,15 @@ app.use('/api/v1', router);
 
 //  Test route
 app.get('/', (req: Request, res: Response) => {
-  res.status(200).json({
-    status: 200,
-    message: 'SHRL server running',
-    time: new Date(),
-  });
+  const siteMode = process.env.NODE_ENV === 'development' ? 'Development' : 'Production';
+  if (siteMode) {
+    res.status(200).json({
+      status: 200,
+      ENV: siteMode,
+      message: 'Server running Successfully',
+      time: new Date(),
+    });
+  }
 });
 
 //  Error handling

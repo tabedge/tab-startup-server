@@ -29,12 +29,14 @@ const sendOTP = async (email: string) => {
       value: OTP_EXPIRATION,
     },
   });
+
+  const fullName = `${user.firstName} ${user.lastName}`;
   await sendEmail({
     to: email,
     subject: 'Your OTP code',
     templateName: 'otp',
     templateData: {
-      name: user?.name,
+      name: fullName,
       otp,
     },
   });
