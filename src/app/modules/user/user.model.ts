@@ -82,7 +82,7 @@ const userSchema = new Schema<IUser>(
     },
     entrepreneur_profile: {
       type: Schema.Types.ObjectId,
-      ref: 'FounderProfile',
+      ref: 'EntrepreneurProfile',
     },
     investor_profile: {
       type: Schema.Types.ObjectId,

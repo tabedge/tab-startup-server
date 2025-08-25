@@ -16,9 +16,9 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:3000',
   'http://127.0.0.1:3000',
-  'https://shrlbd.com',
-  'https://www.shrlbd.com',
-  'https://admin.shrlbd.com',
+  'https://tabstartup.com',
+  'https://www.tabstartup.com',
+  'https://portal.tabstartup.com',
 ];
 
 // Cors Allow Options

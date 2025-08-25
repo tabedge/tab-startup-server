@@ -4,6 +4,7 @@ export enum Role {
   SUPER_ADMIN = 'SUPER_ADMIN',
   INVESTOR = 'investor',
   ENTREPRENEUR = 'entrepreneur',
+  MENTOR = 'mentor',
 }
 
 export enum IsActive {

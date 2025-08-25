@@ -4,9 +4,8 @@ import { User } from '../user/user.model';
 import { IEntrepreneur } from './entrepreneurProfile.interface';
 import { EntrepreneurProfile } from './entrepreneurProfile.model';
 
-const createEntrepreneurProfile = async (payload: IEntrepreneur) => {
-  // Check if user exists
-  const userExists = await User.findById(payload.userId);
+const createEntrepreneurProfile = async (payload: IEntrepreneur, userId: string) => {
+  const userExists = await User.findById(payload.userId || userId);
   if (!userExists) {
     throw new AppError(httpStatus.NOT_FOUND, `User not found by your given id ${payload.userId}`);
   }

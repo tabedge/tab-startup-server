@@ -4,15 +4,15 @@ import { User } from '../user/user.model';
 import { IInvestorProfile } from './investorProfile.interface';
 import { InvestorProfile } from './investorProfile.model';
 
-const createInvestorProfile = async (payload: IInvestorProfile) => {
+const createInvestorProfile = async (payload: IInvestorProfile, userId: string) => {
   // console.log('PAYLOAD-->', payload);
 
   // Validate ObjectId
 
   // Check if user exists
-  const userExists = await User.findById(payload.userId);
+  const userExists = await User.findById(userId);
   if (!userExists) {
-    throw new AppError(httpStatus.NOT_FOUND, `User not found by your given id ${payload.userId}`);
+    throw new AppError(httpStatus.NOT_FOUND, `User not found by your given id ${userId}`);
   }
 
   const linkedinExit = await InvestorProfile.findOne({ linkedIn: payload.linkedIn });
@@ -25,7 +25,7 @@ const createInvestorProfile = async (payload: IInvestorProfile) => {
   const result = await InvestorProfile.create(payload);
 
   // Link profile to user
-  await User.findByIdAndUpdate(payload.userId, { investor_profile: result._id }, { new: true });
+  await User.findByIdAndUpdate(userId, { investor_profile: result._id }, { new: true });
 
   return result;
 };

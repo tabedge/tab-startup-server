@@ -73,9 +73,30 @@ const getMe = async (userId: string) => {
   return user;
 };
 
+const getMyCompanyProfile = async (userId: string) => {
+  const user = await User.findById(userId).select('investor_profile entrepreneur_profile');
+
+  if (!user) return null;
+
+  let profile = null;
+
+  if (user.investor_profile) {
+    profile = await user.populate('investor_profile');
+    return profile.investor_profile;
+  }
+
+  if (user.entrepreneur_profile) {
+    profile = await user.populate('entrepreneur_profile');
+    return profile.entrepreneur_profile;
+  }
+
+  return null;
+};
+
 export const userServices = {
   createUserService,
   updateUser,
   getAllUsers,
   getMe,
+  getMyCompanyProfile,
 };

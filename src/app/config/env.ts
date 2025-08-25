@@ -35,7 +35,7 @@ interface EnvConfig {
     SMTP_PORT: number;
     SMTP_USER: string;
     SMTP_PASS: string;
-    SMTP_FORM: string;
+    SMTP_FROM: string; // rename here
   };
   REDIS: {
     REDIS_HOST: string;
@@ -82,7 +82,7 @@ const loadEnvVariables = (): EnvConfig => ({
     SMTP_PORT: Number(getEnv('SMTP_PORT')),
     SMTP_USER: getEnv('SMTP_USER'),
     SMTP_PASS: getEnv('SMTP_PASS'),
-    SMTP_FORM: getEnv('SMTP_FORM'),
+    SMTP_FROM: getEnv('SMTP_FROM'),
   },
   REDIS: {
     REDIS_HOST: getEnv('REDIS_HOST'),

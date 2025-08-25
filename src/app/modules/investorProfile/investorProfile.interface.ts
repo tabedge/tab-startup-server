@@ -8,5 +8,4 @@ export interface IInvestorProfile {
   portfolioSize: number;
   investmentStage: string;
   industryFocus: string[];
-  userId: Types.ObjectId; // Reference to User
 }
